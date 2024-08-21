@@ -1,1 +1,115 @@
+$card-bg-color: #eeeeee;
+$name-color: #2f4f4f;
+$number-color: #8b0000;
+$transition-duration: 1s;
 
+body {
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  line-height: 115%;
+}
+
+.people {
+  --columns: 2;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 200px);
+  gap: 30px;
+
+  @media (min-width: 1000px) {
+    --columns: 4;
+  }
+}
+
+.person {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  padding-top: 10px;
+
+  transition: transform $transition-duration;
+
+  &:hover {
+    z-index: 1;
+
+    background-color: $card-bg-color;
+    border-radius: 10px 10px 0 0;
+    transform: scale(1.2);
+
+    & .person__photo-image {
+      border-radius: 60px;
+    }
+
+    & .person__extra {
+      display: flex;
+      justify-content: center;
+      background-color: $card-bg-color;
+    }
+  }
+
+  &__photo {
+    position: relative;
+  }
+
+  &__photo-image {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+
+    transition: border-radius $transition-duration;
+  }
+
+  &__rank {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+
+    font-size: 16px;
+    color: $number-color;
+
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__name {
+    font-size: 20px;
+    color: $name-color;
+  }
+
+  &__extra {
+    position: absolute;
+    left: 50%;
+
+    display: none;
+    padding-top: 9px;
+    padding-bottom: 16px;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+
+    font-size: 18px;
+    font-weight: 400;
+
+    transform: translateX(-50%);
+  }
+
+  &__pay::before {
+    content: ',\00a0$';
+  }
+}
